@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <h2>Support <%= @item.user.neighborhood.name %>!</h1>
+</p>
+<div id="item_map">
+  <% if @item.user.latitude.present? %>
+    <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@item.user.latitude},#{@item.user.longitude}&zoom=15&size=300x300&sensor=false&markers=size:mid%7Ccolor:0xFFFF00%7Clabel:Seller%7C#{@item.user.latitude},#{@item.user.longitude}" %>
+  <% end %>                                                 
+</div>
+<p>
+  <b>Title:</b>
+  <%= @item.title %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency(@item.price, :unit => "$", :precision => 0) %>
+</p>
+
+<p><b>Category:</b> <%= @item.category.title %></p>
+
+<p><strong>Seller:</strong> <%= @item.user.first_name %> </p>
+
+<p>
+  <b>Made to order:</b>
+  <%= @item.made_to_order? ? "Yes" : "no" %>
+</p>
+	<% for listing_image in @item.item_images %><br />
+		<%= link_to(image_tag(listing_image.image.url(:small)), listing_image.image.url(:large)) %>
+	<%end %>
+
+	<%= button_to "Add to Favorites", favorites_url(:id => @item.id)%>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
+

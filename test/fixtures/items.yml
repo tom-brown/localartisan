@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  price: 9.99
+  category_id: 1
+  made_to_order: false
+  user_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  price: 9.99
+  category_id: 1
+  made_to_order: false
+  user_id: 1

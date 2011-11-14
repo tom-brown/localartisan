@@ -1,0 +1,52 @@
+<%= form_for @item, :html => { :multipart => true } do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= f.collection_select :category_id, Category.all, :id, :title %>
+  </div>
+  <div class="field">
+    <%= f.label :made_to_order %><br />
+    <%= f.check_box :made_to_order %>
+   </div>
+ 	<div class="newPaperclipFiles">
+   <%= f.fields_for :item_images do |listing_image| %><br />
+   	<% if listing_image.object.new_record? %>
+		<%= listing_image.file_field :image %>
+		<%end %>
+	<%end%>
+ 	</div>
+	<div class="newPaperclipFiles">
+   <%= f.fields_for :item_images do |listing_image| %><br />
+   	<%unless listing_image.object.new_record? %>
+		<%= link_to(image_tag(listing_image.object.image.url(:thumb)), listing_image.object.image.url(:large)) %>
+		<%= listing_image.check_box :_destroy %>
+		<% end %>
+	<%end %>
+ </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

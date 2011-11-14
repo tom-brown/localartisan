@@ -1,0 +1,24 @@
+<table width="800">
+    <tr align="left">
+      <th></th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Neighborhood</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <% for listing_image in item.item_images %><br />
+        		<%= link_to(image_tag(listing_image.image.url(:thumb)), listing_image.image.url(:large)) %>
+        	<%end %>
+    	  </td>
+		    <td><%= item.title%></td>
+		    <td><%= number_to_currency(item.price, :unit => "$", :precision => 0) %></td>
+        <td><%= item.category.title %></td>    
+        <td><%= item.user.neighborhood.name %></td>
+	    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+	    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+      <tr>
+    <% end %>
+</table>

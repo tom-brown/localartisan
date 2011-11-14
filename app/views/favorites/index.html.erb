@@ -1,0 +1,27 @@
+<h1>Favorites</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>User</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @favorites.each do |favorite| %>
+  <tr>
+    <td><%= favorite.item.title %></td>
+    <td><% a = favorite.user %> <%= a.first_name %> <%=a.last_name%></td>
+    <td><% if favorite.note.present?%>
+	 		<%=favorite.note%>
+		<% else%>
+		<%= link_to "Add Note", edit_favorite_url(favorite)%>
+		<% end %></td>
+    <td><%= link_to 'Destroy', favorite_url(favorite), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

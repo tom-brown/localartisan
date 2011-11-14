@@ -1,0 +1,40 @@
+<div id="search_bar">
+	<table width="800">
+		<tr valign="middle">
+			<%= form_tag items_url, :method => :get, :id => "search_form" do%>
+			<td><%= select_tag 'Category', options_from_collection_for_select(Category.all, :id, :title, params[:category]), :prompt => 'Select a Category' %></td>
+			<td><%= select_tag 'Neighborhood', options_from_collection_for_select(Neighborhood.all, :id, :name, params[:neighborhood]), :prompt => 'Select Neighborhood' %></td>
+			<td><strong>Max Price:</strong> <%= select_tag :price, {"10" => "10", "20" => "20"} %> </td>
+			<td><strong>Search:</strong> <%= text_field_tag :search, params[:search] %></td>
+			<td><%= submit_tag "Search" %></td>
+		<%end%>		
+		<td><%= button_to "Reset", root_path %></td>
+		</tr>
+	</table>
+</div>
+<br />
+
+<table width="800">
+    <tr align="left">
+      <th></th>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Neighborhood</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <% for listing_image in item.item_images %><br />
+        		<%= link_to(image_tag(listing_image.image.url(:thumb)), item_url(item)) %>
+        	<%end %>
+    	  </td>
+		    <td><%= link_to item.title, item_url(item) %></td>
+		    <td><%= number_to_currency(item.price, :unit => "$", :precision => 0) %></td>
+        <td><%= item.category.title %></td>    
+        <td><%= item.user.neighborhood.name %></td>
+      <tr>
+    <% end %>
+</table>
+<%= paginate @items%>
+

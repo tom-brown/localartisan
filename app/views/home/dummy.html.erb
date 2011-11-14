@@ -1,0 +1,7 @@
+In Home View
+
+<%= form_tag items_url, :method => :get do %>
+<p>Filter Items: <%= text_field_tag :item %></p>
+<%= submit_tag ‘Search’ %>
+<% end %>
+

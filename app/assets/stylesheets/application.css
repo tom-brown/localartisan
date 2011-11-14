@@ -1,0 +1,79 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+#container {
+  width: 900px;
+  margin:0 auto;
+  zoom: 1;
+  float:middle;
+}
+#container:before, #container:after {
+  display: table;
+  content: "";
+  zoom: 1;
+}
+#container:after {
+  clear: both;
+}
+
+#body {
+  background-color: #ccc;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+#pull-right {
+ float: right;
+ color: gray;
+}
+#sign_in {
+ float: right;
+ padding: 2px 5px 0 0;
+}
+
+#topbar {
+  width: 850px;
+  height: 60px;
+  float: middle;
+  padding: 5px 5px 5px 10px;
+  z-index: 10000;
+  overflow: visible;
+}
+
+  #topbar a:hover {
+    text-decoration:none;
+  }
+
+#main {
+  width: 920px;
+  padding: 0 30px 0 30px ;
+  zoom: 1;
+}
+
+#main:before, #main:after {
+  display: table;
+  content: "";
+  zoom: 1;
+}
+
+#item_map {
+  float: right;
+  
+}
+
+#search_bar {
+	foat:middle;
+}
+
+#welcome {
+  width: 800px;
+}
