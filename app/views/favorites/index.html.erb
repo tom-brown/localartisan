@@ -1,7 +1,7 @@
 <h1>Favorites</h1>
 
-<table>
-  <tr>
+<table width="800">
+  <tr align="left">
     <th>Item</th>
     <th>User</th>
     <th>Note</th>
@@ -12,14 +12,14 @@
 
 <% @favorites.each do |favorite| %>
   <tr>
-    <td><%= favorite.item.title %></td>
+    <td><%= link_to favorite.item.title, item_url(favorite.item_id) %></td>
     <td><% a = favorite.user %> <%= a.first_name %> <%=a.last_name%></td>
     <td><% if favorite.note.present?%>
 	 		<%=favorite.note%>
 		<% else%>
 		<%= link_to "Add Note", edit_favorite_url(favorite)%>
 		<% end %></td>
-    <td><%= link_to 'Destroy', favorite_url(favorite), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', favorite_url(favorite), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
