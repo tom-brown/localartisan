@@ -32,8 +32,10 @@
     <% @items.each do |item| %>
       <tr>
         <td>
+			
           <% for listing_image in item.item_images %><br />
         		<%= link_to(image_tag(listing_image.image.url(:thumb)), item_url(item)) %>
+				<% break %>
         	<%end %>
     	  </td>
 			<td><%= item.category.title %></td>
