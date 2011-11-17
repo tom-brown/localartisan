@@ -7,7 +7,7 @@
   <ul>
   <% @user.nearbys(50).each do |user| %>
     <% user.items.each do |item| %>
-      <li><%= link_to item.title, item_url %> (<%= user.distance.round(2) %> miles)</li>
+      <li><%= link_to item.title, item_url %> (<%= user.distance.to_f.round(1) %> miles)</li>
       <% end %>
   <% end %>
   </ul>
