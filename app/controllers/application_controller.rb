@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_seller
-    user = User.find_by_id(session[:user_id])
-    redirect_to user_url(current_user), :notice => "You must be a seller to list an item. Please update your settings in your Edit Account page." unless user.seller
+    @user = User.find_by_id(session[:user_id])
+    redirect_to user_url(current_user), :notice => "You must be a seller to list an item. Please update your settings in your Edit Account page." unless @user.seller
   end
 end

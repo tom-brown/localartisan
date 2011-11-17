@@ -2,8 +2,6 @@ class ItemsController < ApplicationController
 
   before_filter :require_seller, :only => [:new, :edit]
 
-  # GET /items
-  # GET /items.json
   def index
     @items = Item.scoped
 
@@ -43,8 +41,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/new
-  # GET /items/new.json
   def new
     @item = Item.new
     4.times {@item.item_images.build}
@@ -55,16 +51,16 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/1/edit
   def edit
-    user = current_user
     @item = Item.find(params[:id])
-    img_number_to_show = 4 - @item.item_images.count
-    img_number_to_show.times {@item.item_images.build}
+    if @user == @item.user
+      img_number_to_show = 4 - @item.item_images.count
+      img_number_to_show.times {@item.item_images.build}
+    else
+      redirect_to item_url(@item), :notice => "Only the seller of this item can edit it."
+    end
   end
 
-  # POST /items
-  # POST /items.json
   def create
     @item = Item.new(params[:item])
     @item.user = current_user
@@ -80,8 +76,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PUT /items/1
-  # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
 
@@ -96,8 +90,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.json
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
