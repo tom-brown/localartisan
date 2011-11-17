@@ -11,14 +11,15 @@
         <td>
           <% for listing_image in item.item_images %><br />
         		<%= link_to(image_tag(listing_image.image.url(:thumb)), listing_image.image.url(:large)) %>
+				<% break %>
         	<%end %>
     	  </td>
-		    <td><%= item.title%></td>
+		    <td><%= link_to item.title, item_url(item)%></td>
 		    <td><%= number_to_currency(item.price, :unit => "$", :precision => 0) %></td>
         <td><%= item.category.title %></td>    
         <td><%= item.user.neighborhood.name %></td>
 	    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-	    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+	    <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
       <tr>
     <% end %>
 </table>

@@ -2,16 +2,9 @@
 	<table width="800">
 		<tr valign="middle">
 			<%= form_tag items_url, :method => :get, :id => "search_form" do%>
-			<td><%= select_tag 'Category', options_from_collection_for_select(Category.all, :id, :title, params[:category]), :prompt => 'Select a Category'%></td>
-			<td><%= select_tag 'Neighborhood', options_from_collection_for_select(Neighborhood.all, :id, :name, params[:neighborhood]), :prompt => 'Select Neighborhood', :include_blank => true %></td>
-			<td><%= select_tag "price", 
-		     raw("<option value='10'>$10</option>
-		          <option value='20'>$20</option>
-		          <option value='50'>$50</option>
-		          <option value='100'>$100</option>
-		          <option value='200'>$200</option>
-		          <option value='500'>$500</option>
-		          <option value='1000'>$1000</option>"), :prompt => "Max Price", :include_blank => true%></td>
+			<td><%= select_tag :category, options_from_collection_for_select(Category.all, :id, :title, params[:category]), :prompt => 'Select a Category'%></td>
+			<td><%= select_tag :neighborhood, options_from_collection_for_select(Neighborhood.all, :id, :name, params[:neighborhood]), :prompt => 'Select Neighborhood', :include_blank => true %></td>
+			<td><%= select_tag :price, options_for_select([["$10", "10"], ["$20", "20"]], params[:price]), :prompt => 'Max Price' %></td>
 			<td>Search for: <%= text_field_tag :search, params[:search]%></td>
 			<td><%= submit_tag "Search" %></td>
 		<%end%>		

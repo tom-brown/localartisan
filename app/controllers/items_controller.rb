@@ -7,22 +7,20 @@ class ItemsController < ApplicationController
   def index
     @items = Item.scoped
 
-    if params[:Category].present?
-      @items = @items.where(:category_id => params[:Category])
+    if params[:category].present?
+      @items = @items.where(:category_id => params[:category])
     end
     
      if params[:price].present?
-         @items = @items.where("price <= ?", params[:price])
-        # @items = @items.where(":price <= ?", "#{params[:price]}")
-        # @items = @items.where(":price <= ?", "%#{params[:price]}%")      
+         @items = @items.where("price <= ?", params[:price])     
      end
     
     if params[:search].present?
       @items = @items.where(["title LIKE ?", "%#{params[:search]}%"])
     end
     
-    if params['Neighborhood'].present?
-      users = User.where(:neighborhood_id => params['Neighborhood'])
+    if params[:neighborhood].present?
+      users = User.where(:neighborhood_id => params[:neighborhood])
       @items = @items.where(["user_id IN ( ? )", users.map{|u| u.id}])
     end
     
@@ -39,8 +37,6 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @user = @item.user_id
-    a=@item.item_images.count
-    a.times {@item.item_images.build}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @item }
